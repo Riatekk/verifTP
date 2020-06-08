@@ -1,5 +1,5 @@
 <?php
-include 'class/ALE_function_gestBD.php';
+include 'class/ALE_bibli_gestBD.php';
 
 use GestBD\ConnexionBD;
 use GestBD\RequeteBD;
@@ -30,12 +30,14 @@ $requete = new RequeteBD($conn);
   include 'view/ALE_view_navBar.php';
   ?>
   <div class="container">
+  
     <div class="row">
       <h1>Liste des élèves</h1>
       <div class="filterable">
         <table class="table table-striped">
           <thead>
             <tr class="filters table">
+              <th><a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter</a></th>
               <th><input type="text" class="form-control" placeholder="Nom" disabled></th>
               <th><input type="text" class="form-control" placeholder="Prenom" disabled></th>
               <th><input type="text" class="form-control" placeholder="Trigramme" disabled></th>
@@ -49,11 +51,14 @@ $requete = new RequeteBD($conn);
             <?php
               foreach  ($requete->listeEleves() as $row) 
               {
+                
                 echo '<tr>';
+                echo '<td><button type="button" class="btn btn-warning m-0 p-1">Modifier</button></td>';
                 echo '<td>' . $row['Nom'] . '</td>';
                 echo '<td>' . $row['Prenom'] . '</td>';
                 echo '<td>' . $row['Trigramme'] . '</td>';
                 echo '<td>' . $row['Mail'] . '</td>';
+                echo '<td>' . '</td>';
                 echo '</tr>';
               }
             ?>

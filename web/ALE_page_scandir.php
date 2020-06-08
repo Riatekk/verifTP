@@ -1,7 +1,3 @@
-<?php
-include 'function/ALE_function_gestBD.php';
-?>
-
 
 <!DOCTYPE html>
 <html lang="fr">

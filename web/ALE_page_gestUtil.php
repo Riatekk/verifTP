@@ -6,7 +6,10 @@ use GestBD\RequeteBD;
 
 $conn = new ConnexionBD('127.0.0.1', 'ale_veriftp', 'root', '');
 $requete = new RequeteBD($conn);
-
+if(!empty($_REQUEST['notif']))
+{
+  include 'view/ALE_view_notif.php';
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +26,9 @@ $requete = new RequeteBD($conn);
   <script src="../js/popper.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/ALE_RechercheAvancee.js"></script>
+  <script src="../js/ALE_Notification.js"></script>
+
+  <title>Liste des élèves</title>
 </head>
 
 <body>
@@ -30,7 +36,6 @@ $requete = new RequeteBD($conn);
   include 'view/ALE_view_navBar.php';
   ?>
   <div class="container">
-  
     <div class="row">
       <h1>Liste des élèves</h1>
       <div class="filterable">
@@ -49,11 +54,11 @@ $requete = new RequeteBD($conn);
           </thead>
           <tbody>
             <?php
-              foreach  ($requete->listeEleves() as $row) 
-              {
-                
+            if (!empty($requete->listeEleves())) {
+              foreach ($requete->listeEleves() as $row) {
+
                 echo '<tr>';
-                echo '<td><button type="button" class="btn btn-warning m-0 p-1">Modifier</button></td>';
+                echo '<td><a class="btn btn-warning m-0 p-1" href="ALE_form_modifEleve.php?nom='. $row['Nom'] .'&prenom='. $row['Prenom'] .'&id='. $row['id'] .'">Modifier</a></td>';
                 echo '<td>' . $row['Nom'] . '</td>';
                 echo '<td>' . $row['Prenom'] . '</td>';
                 echo '<td>' . $row['Trigramme'] . '</td>';
@@ -61,6 +66,20 @@ $requete = new RequeteBD($conn);
                 echo '<td>' . '</td>';
                 echo '</tr>';
               }
+            } 
+            else
+            {
+              echo
+                '<div class="toast erreur fixed-bottom m-5">
+                <div class="toast-header ">
+                  ERREUR
+                </div>
+                <div class="toast-body">
+                  '. $requete->listeEleves() .'
+                </div>
+              </div>';
+            }
+
             ?>
           </tbody>
         </table>

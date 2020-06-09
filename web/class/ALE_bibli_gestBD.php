@@ -43,8 +43,42 @@ namespace GestBD {
 
         function listeEleves()
         {
-            $sql = 'SELECT Nom, Prenom, Trigramme, Mail FROM eleves';
-            return $this->queryRequest($sql);
+            $sql = 'SELECT id, Nom, Prenom, Trigramme, Mail FROM eleves';
+
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+            }
+
+            return $res;
+        }
+
+        function insertionEleves($nom, $prenom)
+        {
+
+            $sql = 'INSERT INTO eleves (Nom,Prenom) values (\'' . $nom . '\',\'' . $prenom . '\')';
+
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+            }
+
+            return $res;
+        }
+
+        function modificationEleves($id, $nom, $prenom)
+        {
+            $sql = 'UPDATE eleves SET Nom=\''.$nom.'\',Prenom=\''. $prenom .'\' WHERE id =' . $id;
+            
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+            }
+
+            return $res;
         }
     }
 }

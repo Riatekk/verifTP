@@ -7,16 +7,15 @@ use GestBD\RequeteBD;
 $conn = new ConnexionBD('127.0.0.1', 'ale_veriftp', 'root', '');
 $requete = new RequeteBD($conn);
 
-$res = $requete->insertionEleves($_REQUEST['nom'],$_REQUEST['prenom']);
+$res = $requete->modificationEleves($_REQUEST['id'],$_REQUEST['nom'],$_REQUEST['prenom']);
 
 if($res)
 {
-    header("Location: ../ALE_page_gestUtil.php?notif=1");
+    header("Location: ../ALE_page_gestUtil.php?notif=3");
 }
 else
 {
-    header("Location: ../ALE_page_gestUtil.php?notif=2");
+    header("Location: ../ALE_page_gestUtil.php?notif=4");
 }
-
 exit;
 ?>

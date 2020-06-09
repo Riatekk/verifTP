@@ -6,8 +6,7 @@ use GestBD\RequeteBD;
 
 $conn = new ConnexionBD('127.0.0.1', 'ale_veriftp', 'root', '');
 $requete = new RequeteBD($conn);
-if(!empty($_REQUEST['notif']))
-{
+if (!empty($_REQUEST['notif'])) {
   include 'view/ALE_view_notif.php';
 }
 ?>
@@ -27,7 +26,6 @@ if(!empty($_REQUEST['notif']))
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/ALE_RechercheAvancee.js"></script>
   <script src="../js/ALE_Notification.js"></script>
-
   <title>Liste des élèves</title>
 </head>
 
@@ -37,7 +35,7 @@ if(!empty($_REQUEST['notif']))
   ?>
   <div class="container">
     <div class="row">
-      <h1>Liste des élèves</h1>
+      <h1 class="mt-3">Liste des élèves</h1>
       <div class="filterable">
         <table class="table table-striped">
           <thead>
@@ -55,27 +53,59 @@ if(!empty($_REQUEST['notif']))
           <tbody>
             <?php
             if (!empty($requete->listeEleves())) {
+              $i = 0;
               foreach ($requete->listeEleves() as $row) {
+                
+                $i += 1;
 
                 echo '<tr>';
-                echo '<td><a class="btn btn-warning m-0 p-1" href="ALE_form_modifEleve.php?nom='. $row['Nom'] .'&prenom='. $row['Prenom'] .'&id='. $row['id'] .'">Modifier</a></td>';
+                echo '<td></td>';
                 echo '<td>' . $row['Nom'] . '</td>';
                 echo '<td>' . $row['Prenom'] . '</td>';
                 echo '<td>' . $row['Trigramme'] . '</td>';
                 echo '<td>' . $row['Mail'] . '</td>';
-                echo '<td>' . '</td>';
+                
+                echo '<td>
+
+                  <script>
+                    $(document).ready(function () {
+                      $("#myBtn' . $i .'").click(function () {
+                          $(\'.toast' . $i .'\').toast(\'show\');
+                      });
+                      $(\'.toast' . $i .'\').toast({
+                        delay: 3600000
+                      });
+                  });
+                  </script>
+
+                  <a id="myBtn' . $i .'" class="btn btn-info m-0 p-1">
+                    <img class=".mx-auto d-block" src="../icon/gear-wide-connected.svg" alt="" height="30">
+                  </a>
+
+                  <div class="toast toast' . $i . ' fade hide position-absolute">
+                    <div class="toast-header">
+                      <div type="button" class="btn close text-right " data-dismiss="toast">&times;</div>
+                      <div class="font-weight-bold"> ' . $row['Nom'] . ' ' . $row['Prenom'] . ' </div>
+
+                    </div>
+                    <div class="toast-body">
+                    Voulez-vous le <a class="btn btn-warning m-0 p-1" href="ALE_form_modifEleve.php?nom=' . $row['Nom'] . '&prenom=' . $row['Prenom'] . '&id=' . $row['id'] . '">Modifier</a>
+                     ou le <a class="btn btn-danger m-0 p-1" href="function/ALE_delete_eleves.php?id=' . $row['id'] . '">Supprimer</a> ?
+                    </div>
+                  </div>
+
+                  </td>';
                 echo '</tr>';
               }
-            } 
-            else
-            {
+            } else {
               echo
                 '<div class="toast erreur fixed-bottom m-5">
                 <div class="toast-header ">
                   ERREUR
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"></button>
                 </div>
                 <div class="toast-body">
-                  '. $requete->listeEleves() .'
+                  ' . $requete->listeEleves() . '
                 </div>
               </div>';
             }

@@ -1,2 +1,0 @@
-CREATE TRIGGER `Tri_ALE_Trigramme` BEFORE INSERT ON `eleves`
- FOR EACH ROW SET NEW.Trigramme = UPPER(CONCAT(LEFT( NEW.Prenom, 1), LEFT( NEW.Nom,2 )))

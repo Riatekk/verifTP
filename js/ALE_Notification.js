@@ -11,3 +11,5 @@ $(document).ready(function () {
     });
     $('.notif').toast('show');
 });
+
+

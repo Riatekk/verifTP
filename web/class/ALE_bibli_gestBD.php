@@ -43,7 +43,7 @@ namespace GestBD {
 
         function listeEleves()
         {
-            $sql = 'SELECT id, Nom, Prenom, Trigramme, Mail FROM eleves';
+            $sql = 'CALL PSS_ListeEleve';
 
             try {
                 $res = $this->queryRequest($sql);
@@ -57,8 +57,8 @@ namespace GestBD {
         function insertionEleves($nom, $prenom)
         {
 
-            $sql = 'INSERT INTO eleves (Nom,Prenom) values (\'' . $nom . '\',\'' . $prenom . '\')';
-
+            //$sql = 'INSERT INTO eleves (Nom,Prenom) values (\'' . $nom . '\',\'' . $prenom . '\')';
+            $sql = 'CALL PSI_AjoutEleve(\'' . $nom . '\',\'' . $prenom . '\')';
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
@@ -70,7 +70,20 @@ namespace GestBD {
 
         function modificationEleves($id, $nom, $prenom)
         {
-            $sql = 'UPDATE eleves SET Nom=\''.$nom.'\',Prenom=\''. $prenom .'\' WHERE id =' . $id;
+            $sql = 'CALL PSU_ModificationEleves(\''. $id .'\',\''.$nom.'\',\''. $prenom .'\')';
+            
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+            }
+
+            return $res;
+        }
+
+        function supprimerEleves($id)
+        {
+            $sql = 'CALL PSD_SuppressionEleves(' . $id .')';
             
             try {
                 $res = $this->queryRequest($sql);

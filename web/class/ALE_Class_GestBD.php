@@ -22,7 +22,8 @@ namespace GestBD {
             try {
                 return new PDO('mysql:dbname=' . $this->nomBD . ';host=' . $this->ip, $this->utilisateur, $this->motDePasse);
             } catch (PDOException $e) {
-                echo 'Connexion échouée : ' . $e->getMessage();
+                //echo 'Connexion échouée : ' . $e->getMessage();
+                return false;
             }
         }
     }

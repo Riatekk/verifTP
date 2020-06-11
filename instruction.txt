@@ -1,0 +1,4 @@
+
+!! Insertion de la base de données -> sql/database/ale_veriftp.sql !!
+
+Le reste des paramètres se configure sur le site a l'adresse suivante : http://localhost/veriftp/web/ 

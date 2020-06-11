@@ -75,4 +75,31 @@ if($_REQUEST['notif'] == 6)
     </div>
     </div>';
 }
+
+if($_REQUEST['notif'] == 7)
+{
+    echo
+    '<div class="toast notif  fixed-bottom m-5">
+    <div class="toast-header text-white bg-success">
+    Succès d\'enregistrement
+    </div>
+    <div class="toast-body">
+        L\'enregistrement des informations de la base de données est réussi avec succès
+    </div>
+    </div>';
+}
+
+if($_REQUEST['notif'] == 8)
+{
+    echo
+    '<div class="toast notif  fixed-bottom m-5">
+    <div class="toast-header text-white bg-danger">
+    Erreur d\'enregistrement
+    </div>
+    <div class="toast-body">
+    L\'enregistrement des informations de la base de données à échoué
+    </div>
+    </div>';
+}
+
 ?>

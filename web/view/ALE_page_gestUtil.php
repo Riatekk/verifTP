@@ -82,8 +82,12 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
         <div class="d-flex">
           <h1 class="mr-auto">Liste des élèves</h1>
           <div class="p-2">
-            <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter</a>
+            <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter une classe</a>
           </div>
+          <div class="p-2">
+            <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter des élèves</a>
+          </div>
+          
 
           <div class="p-2">
             <script>
@@ -96,7 +100,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
                 });
               });
             </script>
-            <a id="myBtn0" class=" btn btn-primary text-white">Gérer les élèves</a>
+            <a id="myBtn0" class=" btn btn-primary text-white">Gérer les élèves par classe</a>
 
             <div class="toast toast0 fade hide position-absolute">
 
@@ -108,11 +112,11 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
               </div>
 
               <div class="toast-body">
-                <form action="#" method="get">
+                <form action="../function/ALE_delete_classe.php" method="get">
                   <label for="classe" class="mr-sm-2">La classe : </label>
                   <select classe="form-control" name="classe" id="classe">
-                    <option value="1SIO">1SIO</option>
-                    <option value="2SIO">2SIO</option>
+                    <option value="1">1SIO</option>
+                    <option value="2">2SIO</option>
                   </select>
                   <input type="submit" class="btn btn-danger btn-sm" value="Supprimer les élèves">
                 </form>
@@ -127,7 +131,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
         <table class="table table-striped">
           <thead>
             <tr class="filters table">
-              <th></th>
+              <th><input type="text" class="form-control" placeholder="CLasse" disabled></th>
               <th><input type="text" class="form-control" placeholder="Nom" disabled></th>
               <th><input type="text" class="form-control" placeholder="Prenom" disabled></th>
               <th><input type="text" class="form-control" placeholder="Trigramme" disabled></th>
@@ -148,7 +152,8 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
               $i += 1;
 
               echo '<tr>
-              <td></td>
+              
+              <td>' . $row['classe_libelle'] . '</td>
               <td>' . $row['Nom'] . '</td>
               <td>' . $row['Prenom'] . '</td>
               <td>' . $row['Trigramme'] . '</td>

@@ -42,8 +42,8 @@
             <div class="form-group">
                 <label for="classe" class="mr-sm-2">Classe</label>
                 <select class="form-control " name="classe" id="classe">
-                    <option value="1SIO">1SIO</option>
-                    <option value="2SIO">2SIO</option>
+                    <option value="1">1SIO</option>
+                    <option value="2">2SIO</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Enregistrer</button>
@@ -52,10 +52,10 @@
         <br />
         <br />
         <h2>Importer un fichier CSV</h2>
-        <form class="needs-validation" action="../function/ALE_insert_eleves.php" method="get" novalidate>
+        <form class="needs-validation" action="../function/ALE_insert_eleves.php" method="post" enctype="multipart/form-data" novalidate>
             <div class="form-group">
                 <label for="file" class="mr-sm-2">Fichier CSV : </label>
-                <input type="file" placeholder="Selectionner le fichier" id="file">
+                <input type="file" placeholder="Selectionner le fichier" id="file" name="file">
 
                 <div class="valid-feedback">Valide</div>
                 <div class="invalid-feedback">Sélectionner le fichier CSV</div>
@@ -63,8 +63,8 @@
             <div class="form-group">
                 <label for="classe" class="mr-sm-2">Selectionner une classe</label>
                 <select class="form-control " name="classe" id="classe">
-                    <option value="1SIO">1SIO</option>
-                    <option value="2SIO">2SIO</option>
+                    <option value="1">1SIO</option>
+                    <option value="2">2SIO</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary mb-2">Envoyer</button>

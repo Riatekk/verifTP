@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 12 juin 2020 à 15:20
+-- Généré le :  lun. 15 juin 2020 à 14:25
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.0.33
 
@@ -75,9 +75,8 @@ CREATE TABLE IF NOT EXISTS `classe` (
 -- Déchargement des données de la table `classe`
 --
 
-INSERT INTO `classe` (`id`, `classe_libelle`) VALUES
-(1, '1SIO'),
-(2, '2SIO');
+INSERT INTO `classe` (`id`, `classe_libelle`) VALUES(1, '1SIO');
+INSERT INTO `classe` (`id`, `classe_libelle`) VALUES(2, '2SIO');
 
 -- --------------------------------------------------------
 
@@ -96,67 +95,6 @@ CREATE TABLE IF NOT EXISTS `eleves` (
   PRIMARY KEY (`id`),
   KEY `fk_eleces_classe` (`id_classe`)
 ) ENGINE=MyISAM AUTO_INCREMENT=887 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `eleves`
---
-
-INSERT INTO `eleves` (`id`, `Nom`, `Prenom`, `Trigramme`, `Mail`, `id_classe`) VALUES
-(886, 'REIX', 'Elodie', 'ERE', 'Elodie.REIX@campus-la-chataigneraie.org', 2),
-(885, 'QUINTANEL', 'Maxime', 'MQU', 'Maxime.QUINTANEL@campus-la-chataigneraie.org', 2),
-(884, 'PETIT', 'Alexandre', 'APE', 'Alexandre.PETIT@campus-la-chataigneraie.org', 2),
-(883, 'MULLER ', 'Lucien', 'LMU', 'Lucien.MULLER @campus-la-chataigneraie.org', 2),
-(882, 'LOUET ', 'Tom', 'TLO', 'Tom.LOUET @campus-la-chataigneraie.org', 2),
-(881, 'LETERME', 'Matthieu', 'MLE', 'Matthieu.LETERME@campus-la-chataigneraie.org', 2),
-(880, 'LEMOINE', 'Antonin', 'ALE', 'Antonin.LEMOINE@campus-la-chataigneraie.org', 2),
-(879, 'LEJEUNE', 'Thibaud', 'TLE', 'Thibaud.LEJEUNE@campus-la-chataigneraie.org', 2),
-(878, 'LACHENY', 'Baptiste', 'BLA', 'Baptiste.LACHENY@campus-la-chataigneraie.org', 2),
-(877, 'HENRIQUES', 'Sylvio', 'SHE', 'Sylvio.HENRIQUES@campus-la-chataigneraie.org', 2),
-(876, 'GOUCHET', 'Theo', 'TGO', 'Theo.GOUCHET@campus-la-chataigneraie.org', 2),
-(875, 'FRERE ', 'Thibaud', 'TFR', 'Thibaud.FRERE @campus-la-chataigneraie.org', 2),
-(874, 'ELHOR', 'Mehdi', 'MEL', 'Mehdi.ELHOR@campus-la-chataigneraie.org', 2),
-(873, 'DUPONCHEL', 'Julien', 'JDU', 'Julien.DUPONCHEL@campus-la-chataigneraie.org', 2),
-(872, 'DEVIN', 'Teddy', 'TDE', 'Teddy.DEVIN@campus-la-chataigneraie.org', 2),
-(871, 'CARPENTIER', 'Benjamin', 'BCA', 'Benjamin.CARPENTIER@campus-la-chataigneraie.org', 2),
-(870, 'BLANCHE', 'Quentin', 'QBL', 'Quentin.BLANCHE@campus-la-chataigneraie.org', 2),
-(869, 'BISOGNANI', 'Thibaut', 'TBI', 'Thibaut.BISOGNANI@campus-la-chataigneraie.org', 2),
-(868, 'BAUDUFFE', 'Gabriel', 'GBA', 'Gabriel.BAUDUFFE@campus-la-chataigneraie.org', 2),
-(867, 'BASTIEN', 'Pierre', 'PBA', 'Pierre.BASTIEN@campus-la-chataigneraie.org', 2),
-(866, 'TANGUY', 'Pierrick', 'PTA', 'Pierrick.TANGUY@campus-la-chataigneraie.org', 1),
-(865, 'TAHRI', 'Issame', 'ITA', 'Issame.TAHRI@campus-la-chataigneraie.org', 1),
-(864, 'RAFIK', 'Abderahmane', 'ARA', 'Abderahmane.RAFIK@campus-la-chataigneraie.org', 1),
-(863, 'POULAIN', 'Charles', 'CPO', 'Charles.POULAIN@campus-la-chataigneraie.org', 1),
-(862, 'OUELAA', 'Icham', 'IOU', 'Icham.OUELAA@campus-la-chataigneraie.org', 1),
-(861, 'MOUILLARD', 'Xavier', 'XMO', 'Xavier.MOUILLARD@campus-la-chataigneraie.org', 1),
-(860, 'MORICE', 'Tom', 'TMO', 'Tom.MORICE@campus-la-chataigneraie.org', 1),
-(859, 'MANFREDI', 'Adrien', 'AMA', 'Adrien.MANFREDI@campus-la-chataigneraie.org', 1),
-(858, 'MABIRE', 'Nino', 'NMA', 'Nino.MABIRE@campus-la-chataigneraie.org', 1),
-(857, 'LEFEBVRE', 'Quentin', 'QLE', 'Quentin.LEFEBVRE@campus-la-chataigneraie.org', 1),
-(856, 'LEFEBVRE', 'Hugo', 'HLE', 'Hugo.LEFEBVRE@campus-la-chataigneraie.org', 1),
-(855, 'LAMBERT', 'Antony', 'ALA', 'Antony.LAMBERT@campus-la-chataigneraie.org', 1),
-(854, 'ICARE', 'Nicolas', 'NIC', 'Nicolas.ICARE@campus-la-chataigneraie.org', 1),
-(853, 'HAUTEMER', 'Mathieu', 'MHA', 'Mathieu.HAUTEMER@campus-la-chataigneraie.org', 1),
-(852, 'HAMON', 'Samuel', 'SHA', 'Samuel.HAMON@campus-la-chataigneraie.org', 1),
-(851, 'GACHET', 'Baptiste', 'BGA', 'Baptiste.GACHET@campus-la-chataigneraie.org', 1),
-(850, 'FREBERT', 'Julien', 'JFR', 'Julien.FREBERT@campus-la-chataigneraie.org', 1),
-(849, 'FELLER', 'Jacques', 'JFE', 'Jacques.FELLER@campus-la-chataigneraie.org', 1),
-(848, 'DUVAL', 'Florian', 'FDU', 'Florian.DUVAL@campus-la-chataigneraie.org', 1),
-(847, 'DUPUIS', 'Maxence', 'MDU', 'Maxence.DUPUIS@campus-la-chataigneraie.org', 1),
-(846, 'DUPONCHEL', 'Karl', 'KDU', 'Karl.DUPONCHEL@campus-la-chataigneraie.org', 1),
-(845, 'DUBOIS', 'Nicolas', 'NDU', 'Nicolas.DUBOIS@campus-la-chataigneraie.org', 1),
-(844, 'DISLAIRE', 'Amandine', 'ADI', 'Amandine.DISLAIRE@campus-la-chataigneraie.org', 1),
-(843, 'DEVILLERS', 'Matthieu', 'MDE', 'Matthieu.DEVILLERS@campus-la-chataigneraie.org', 1),
-(842, 'DECROIX', 'Quentin', 'QDE', 'Quentin.DECROIX@campus-la-chataigneraie.org', 1),
-(841, 'COURSELLE', 'Dorian', 'DCO', 'Dorian.COURSELLE@campus-la-chataigneraie.org', 1),
-(840, 'CELIA', 'Victor', 'VCE', 'Victor.CELIA@campus-la-chataigneraie.org', 1),
-(839, 'CARTRON', 'Etienne', 'ECA', 'Etienne.CARTRON@campus-la-chataigneraie.org', 1),
-(838, 'CANTRELLE', 'Scott', 'SCA', 'Scott.CANTRELLE@campus-la-chataigneraie.org', 1),
-(837, 'BULOT', 'Valentin', 'VBU', 'Valentin.BULOT@campus-la-chataigneraie.org', 1),
-(836, 'BOUKHATEB', 'Abdel-Illah', 'ABO', 'Abdel-Illah.BOUKHATEB@campus-la-chataigneraie.org', 1),
-(835, 'BOUFFAY', 'Arthur', 'ABO', 'Arthur.BOUFFAY@campus-la-chataigneraie.org', 1),
-(834, 'BLONDEL', 'Martin', 'MBL', 'Martin.BLONDEL@campus-la-chataigneraie.org', 1),
-(833, 'ANTIOME', 'Paul', 'PAN', 'Paul.ANTIOME@campus-la-chataigneraie.org', 1),
-(832, 'ANGOT', 'Jean', 'JAN', 'Jean.ANGOT@campus-la-chataigneraie.org', 1);
 
 --
 -- Déclencheurs `eleves`

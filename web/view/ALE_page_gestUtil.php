@@ -43,13 +43,15 @@ if (!empty($_REQUEST['notif'])) {
  * contenant les informations de la base de données n'exite
  * pas, alors on redirige vers une page d'erreur.
  */
-if (!$conn->connexion() || !file_exists($cheminXML)) {
+if (!$conn->testConnexionBD($BDnom) || !$conn->testConnexionUtilisateur() || !file_exists($cheminXML)) {
   if (!empty($_REQUEST['notif'])) {
     header("Location: ALE_page_erreur.php?notif=" . $_REQUEST['notif']);
   } else {
     header("Location: ALE_page_erreur.php");
   }
 }
+
+
 
 ?>
 

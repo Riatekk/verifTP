@@ -1,7 +1,48 @@
 <?php
+
+include '../class/ALE_Class_GestBD.php';
+include '../class/ALE_Class_GestXML.php';
+
+use GestBD\ConnexionBD;
+use GestBD\RequeteBD;
+use GestXML\FichierXML;
+
+/**
+ * Création d'un objet pour accédé aux informations de 
+ * la base de données enregistré dans un XML.
+ */
+$cheminXML = '../../data/file.xml';
+$xml = new FichierXML($cheminXML);
+
+/**
+ * Récupération des informations enregistré concernant 
+ * la base de données dans le fichier XML 'data/file.xml'.
+ */
+$AddrIP = $xml->getIp();
+$BDnom = $xml->getBDName();
+$Utilisateur = $xml->getUtilisateur();
+$MotDePasse = $xml->getMotDePasse();
+
+/**
+ * Création des objets de connexion a la base de données 
+ * et de requètage.
+ */
+$conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
+$requete = new RequeteBD($conn);
+
+/**
+ * Si un numéro de nofication et présent dans URL 
+ * alors on inclut la page de gestion des notifications.
+ */
 if (!empty($_REQUEST['notif'])) {
     include 'ALE_view_notif.inc.php';
 }
+
+echo $conn->testConnexionBD($BDnom);
+echo $conn->testConnexionUtilisateur();
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

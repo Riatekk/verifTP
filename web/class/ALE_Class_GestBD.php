@@ -46,6 +46,62 @@ namespace GestBD {
                 return false;
             }
         }
+
+        /**
+         * Recherche un base de données dans le SGBDR
+         * 
+         * 
+         * @return -> un message d'erreur ou non : string
+         */
+        function testConnexionUtilisateur()
+        {
+
+            $otherConnexion = new ConnexionBD(
+                $this->ip,
+                'INFORMATION_SCHEMA',
+                $this->utilisateur,
+                $this->motDePasse
+            );
+
+            $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA';
+
+            try {
+                $res = $otherConnexion->connexion()->query($sql);
+                return true;
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+                return false;
+            }
+
+        }
+
+        /**
+         * Fonction qui recherche la base de données saisie
+         * et présente dans le SGBDR
+         * 
+         * @param nomBaseDeDonnees -> nom de la base de donnees a chercher : string
+         * @return -> la bases de données saisie : array
+         */
+        function testConnexionBD($nomBaseDeDonnees)
+        {
+            $otherConnexion = new ConnexionBD(
+                $this->ip,
+                'INFORMATION_SCHEMA',
+                $this->utilisateur,
+                $this->motDePasse
+            );
+
+            $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \'' . $nomBaseDeDonnees . '\'';
+
+            try {
+                $res = $otherConnexion->connexion()->query($sql);
+                return true;
+            } catch (PDOException $e) {
+                $res = $e->getMessage();
+                return false;
+            }
+
+        }
     }
 
     /**
@@ -55,7 +111,6 @@ namespace GestBD {
     class RequeteBD
     {
         var $Connexion;
-
         /**
          * Objet de requete en recupérant l'objet de connexion a la 
          * base de données
@@ -67,7 +122,7 @@ namespace GestBD {
         {
             $this->Connexion = $maConnexion;
         }
-
+        
         /**
          * Fonction privé d'envoi d'une requete passé en parametre 
          * vers la base de données
@@ -113,7 +168,7 @@ namespace GestBD {
 
             //$sql = 'INSERT INTO eleves (Nom,Prenom) values (\'' . $nom . '\',\'' . $prenom . '\')';
             $sql = 'CALL PSI_AjoutEleve(\'' . $nom . '\',\'' . $prenom . '\',' . $uneClasse . ')';
-            
+
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {

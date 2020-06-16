@@ -114,7 +114,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
               </div>
 
               <div class="toast-body">
-                <form action="../function/ALE_delete_classe.php" method="get">
+                <form action="../function/ALE_delete_elevesDeClasse.php" method="get">
                   <label for="classe" class="mr-sm-2">La classe : </label>
                   <select classe="form-control" name="classe" id="classe">
                     <?php

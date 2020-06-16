@@ -2,9 +2,13 @@
 
 namespace GestBD {
 
+    use Exception;
     use PDO;
     use PDOException;
     use mysqli;
+
+    //On desactive les erreurs affiché pas PHP
+    error_reporting(0);
 
     /**
      * Cette classe permet d'etablir une connexion a une
@@ -47,7 +51,7 @@ namespace GestBD {
                 return false;
             }
         }
-/*
+        /*
         function creationBaseDeDonnées($maBaseDeDonnees)
         {
             echo $maBaseDeDonnees . '<br/>';
@@ -76,77 +80,23 @@ namespace GestBD {
         }
 */
         /**
-         * Recherche un base de données dans le SGBDR
+         * Test de connexion au SGBDR avec l'utilisatuer courant
          * 
          * 
-         * @return -> un message d'erreur ou non : string
+         * @return -> un bool true connexion reussi, false echec : bool
          */
-        /*
+
         function testConnexionUtilisateur()
         {
-
-            $otherConnexion = new ConnexionBD(
-                $this->ip,
-                'INFORMATION_SCHEMA',
-                $this->utilisateur,
-                $this->motDePasse
-            );
-
-            $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA';
-
-            try {
-                $res = $otherConnexion->connexion()->query($sql);
-                foreach($res as $res){
-                    if(!$res){
-                        return false;
-                    }else{
-                        return true;
-                    }
-                }
-                
-            } catch (PDOException $e) {
+            $link = mysqli_connect($this->ip, $this->utilisateur, $this->motDePasse);
+            if (!$link) {
                 return false;
+            } else {
+                return true;
             }
 
+            mysqli_close($link);
         }
-*/
-        /**
-         * Fonction qui recherche la base de données saisie
-         * et présente dans le SGBDR
-         * 
-         * @param nomBaseDeDonnees -> nom de la base de donnees a chercher : string
-         * @return -> la bases de données saisie : array
-         */
-        /*
-        function testConnexionBD($nomBaseDeDonnees)
-        {
-            $otherConnexion = new ConnexionBD(
-                $this->ip,
-                'INFORMATION_SCHEMA',
-                $this->utilisateur,
-                $this->motDePasse
-            );
-
-            $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \'' . $nomBaseDeDonnees . '\'';
-
-            try {
-                $res = $otherConnexion->connexion()->query($sql);
-                foreach($res as $res){
-                    if($res['SCHEMA_NAME'] == $nomBaseDeDonnees){
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-                
-            } catch (PDOException $e) {
-                $res = array();
-                return false;
-            }
-
-        }
-*/
     }
 
     /**
@@ -181,7 +131,8 @@ namespace GestBD {
             return $this->Connexion->connexion()->query($uneRequeteSQL);
         }
 
-        function insertionClasse($uneClasse){
+        function insertionClasse($uneClasse)
+        {
 
             $sql = 'CALL PSI_AjoutClasse(\'' . $uneClasse . '\')';
 
@@ -198,7 +149,8 @@ namespace GestBD {
          * 
          * @return -> Liste de classe : array
          */
-        function listeClasse(){
+        function listeClasse()
+        {
             $sql = 'CALL PSS_ListeClasse';
 
             try {
@@ -304,6 +256,26 @@ namespace GestBD {
         function supprimerElevesParClasse($uneClasse)
         {
             $sql = 'CALL PSD_SuppressionElevesParClasse(' . $uneClasse . ')';
+
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = array();
+            }
+
+            return $res;
+        }
+
+        /**
+         * Supprime une classe dans la base de donnée
+         * 
+         * @param uneClasse -> identifiant unique de la classe : int
+         * 
+         * @return -> erreur ou non de la requete : string
+         */
+        function supprimerClasse($uneClasse)
+        {
+            $sql = 'CALL PSD_SuppressionClasse(' . $uneClasse . ')';
 
             try {
                 $res = $this->queryRequest($sql);

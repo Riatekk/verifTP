@@ -1,3 +1,37 @@
+<?php
+
+include '../class/ALE_Class_GestBD.php';
+include '../class/ALE_Class_GestXML.php';
+
+use GestBD\ConnexionBD;
+use GestBD\RequeteBD;
+use GestXML\FichierXML;
+
+/**
+ * Création d'un objet pour accédé aux informations de 
+ * la base de données enregistré dans un XML.
+ */
+$cheminXML = '../../data/file.xml';
+$xml = new FichierXML($cheminXML);
+
+/**
+ * Récupération des informations enregistré concernant 
+ * la base de données dans le fichier XML 'data/file.xml'.
+ */
+$AddrIP = $xml->getIp();
+$BDnom = $xml->getBDName();
+$Utilisateur = $xml->getUtilisateur();
+$MotDePasse = $xml->getMotDePasse();
+
+/**
+ * Création des objets de connexion a la base de données 
+ * et de requètage.
+ */
+$conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
+$requete = new RequeteBD($conn);
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -46,8 +80,11 @@
             <div class="form-group">
                 <label for="classe" class="mr-sm-2">Classe</label>
                 <select class="form-control " name="classe" id="classe">
-                    <option value="1SIO">1SIO</option>
-                    <option value="2SIO">2SIO</option>
+                    <?php
+                    foreach ($requete->listeClasse() as $classe) {
+                        echo '<option value="' . $classe['id'] . '">' . $classe['classe_libelle'] . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Enregistrer</button>

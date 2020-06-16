@@ -30,15 +30,16 @@ $MotDePasse = $xml->getMotDePasse();
 $conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
 $requete = new RequeteBD($conn);
 
-$res = $requete->supprimerElevesParClasse($_REQUEST['classe']);
+$requete->supprimerElevesParClasse($_REQUEST['id']);
+$res = $requete->supprimerClasse($_REQUEST['id']);
 
 if($res)
 {
-    header("Location: ../view/ALE_page_gestUtil.php?notif=5");
+    header("Location: ../view/ALE_form_ajoutClasse.php?notif=5");
 }
 else
 {
-    header("Location: ../view/ALE_page_gestUtil.php?notif=6");
+    header("Location: ../view/ALE_form_ajoutClasse.php?notif=6");
 }
 
 exit;

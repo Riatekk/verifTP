@@ -141,7 +141,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
                     </div>
 
                     <div class="toast-body">
-                    <a class="btn btn-danger m-0 p-1" href="../function/ALE_delete_eleves.php?id=' . $row['classe_libelle'] . '">Supprimer la classe</a>
+                    <a class="btn btn-danger m-0 p-1" href="../function/ALE_delete_classe.php?id=' . $row['id'] . '">Supprimer la classe</a>
                     </div>
                   
                   </div>

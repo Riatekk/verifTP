@@ -37,7 +37,6 @@ $requete = new RequeteBD($conn);
 if (!empty($_REQUEST['notif'])) {
     include 'ALE_view_notif.inc.php';
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,8 +52,29 @@ if (!empty($_REQUEST['notif'])) {
     ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1>Connexion à la base de données impossible</h1>
-            <p>Modifier les parametres de la base de données pour corriger les problème
+            <h1>Status des connexions</h1>
+            <?php
+            if ($conn->testConnexionUtilisateur()) 
+            {
+                echo '<img class="bg-success rounded" src="../../icon/check.svg" alt="Connexion établie"> Utilisateur<br/>' ;
+
+                if ($conn->connexion()) {
+                    echo '<img class="bg-success rounded" src="../../icon/check.svg" alt="Connexion établie"> Base de données <br/>';
+                } 
+                else 
+                {
+                    echo '<img class="bg-danger rounded" src="../../icon/exclamation-square.svg" alt="Connexion établie"> Erreur Base de données <br/>';
+                }
+
+            } 
+            else 
+            {
+                echo '<img class="bg-danger rounded" src="../../icon/exclamation-square.svg" alt="Connexion établie"> Erreur Utilisateur <br/>';
+            }
+
+            ?>
+            <br/>
+            <p>Modifier les parametres de la base de données pour corriger les problèmes
                 <br />
                 <a class="btn btn-primary btn-lg mt-3 btn-block" href="ALE_form_parametre.php">Paramètre de la base de données</a>
             </p>

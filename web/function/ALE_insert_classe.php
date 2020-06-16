@@ -35,11 +35,11 @@ $res = $requete->insertionClasse($_REQUEST['classe']);
 
 if($res)
 {
-    header("Location: ../view/ALE_page_gestUtil.php?notif=1");
+    header("Location: ../view/ALE_form_ajoutClasse.php?notif=1");
 }
 else
 {
-    header("Location: ../view/ALE_page_gestUtil.php?notif=2");
+    header("Location: ../view/ALE_form_ajoutClasse.php?notif=2");
 }
 
 exit;

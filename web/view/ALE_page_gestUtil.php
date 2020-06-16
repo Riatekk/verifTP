@@ -89,7 +89,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
           <div class="p-2">
             <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter des élèves</a>
           </div>
-          
+
 
           <div class="p-2">
             <script>
@@ -117,8 +117,11 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
                 <form action="../function/ALE_delete_classe.php" method="get">
                   <label for="classe" class="mr-sm-2">La classe : </label>
                   <select classe="form-control" name="classe" id="classe">
-                    <option value="1">1SIO</option>
-                    <option value="2">2SIO</option>
+                    <?php
+                    foreach ($requete->listeClasse() as $classe) {
+                      echo '<option value="' . $classe['id'] . '">' . $classe['classe_libelle'] . '</option>';
+                    }
+                    ?>
                   </select>
                   <input type="submit" class="btn btn-danger btn-sm" value="Supprimer les élèves">
                 </form>

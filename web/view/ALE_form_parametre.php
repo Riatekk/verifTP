@@ -71,6 +71,8 @@ $MotDePasse = $xml->getMotDePasse();
             <button type="submit" class="btn btn-success">Enregistrer</button>
 
         </form>
+        
+        <a class="mt-3 btn btn-primary disabled" href="../function/ALE_create_database.php">Insérer la base de données</a>
     </div>
 </body>
 

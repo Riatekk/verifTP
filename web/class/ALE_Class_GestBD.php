@@ -4,6 +4,7 @@ namespace GestBD {
 
     use PDO;
     use PDOException;
+    use mysqli;
 
     /**
      * Cette classe permet d'etablir une connexion a une
@@ -46,13 +47,41 @@ namespace GestBD {
                 return false;
             }
         }
+/*
+        function creationBaseDeDonnées($maBaseDeDonnees)
+        {
+            echo $maBaseDeDonnees . '<br/>';
+            // Create connection
+            $conn = new mysqli($this->ip, $this->utilisateur, $this->motDePasse);
+            // Check connection
+            if ($conn->connect_error) {
+                
+                echo 'Erreur de connexion';
+                return false;
+            }
 
+            // Create database
+            $sql = $maBaseDeDonnees;
+            $conn->query($sql);
+
+            if ($conn->query($sql) === TRUE) {
+                
+                echo 'OK';
+                return true;
+            } else {
+                
+                echo 'Erreur SQL' . $conn->error;
+                return false;
+            }
+        }
+*/
         /**
          * Recherche un base de données dans le SGBDR
          * 
          * 
          * @return -> un message d'erreur ou non : string
          */
+        /*
         function testConnexionUtilisateur()
         {
 
@@ -67,14 +96,20 @@ namespace GestBD {
 
             try {
                 $res = $otherConnexion->connexion()->query($sql);
-                return true;
+                foreach($res as $res){
+                    if(!$res){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+                
             } catch (PDOException $e) {
-                $res = $e->getMessage();
                 return false;
             }
 
         }
-
+*/
         /**
          * Fonction qui recherche la base de données saisie
          * et présente dans le SGBDR
@@ -82,6 +117,7 @@ namespace GestBD {
          * @param nomBaseDeDonnees -> nom de la base de donnees a chercher : string
          * @return -> la bases de données saisie : array
          */
+        /*
         function testConnexionBD($nomBaseDeDonnees)
         {
             $otherConnexion = new ConnexionBD(
@@ -95,13 +131,22 @@ namespace GestBD {
 
             try {
                 $res = $otherConnexion->connexion()->query($sql);
-                return true;
+                foreach($res as $res){
+                    if($res['SCHEMA_NAME'] == $nomBaseDeDonnees){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
                 return false;
             }
 
         }
+*/
     }
 
     /**
@@ -122,7 +167,7 @@ namespace GestBD {
         {
             $this->Connexion = $maConnexion;
         }
-        
+
         /**
          * Fonction privé d'envoi d'une requete passé en parametre 
          * vers la base de données
@@ -136,19 +181,47 @@ namespace GestBD {
             return $this->Connexion->connexion()->query($uneRequeteSQL);
         }
 
+        function insertionClasse($uneClasse){
+
+            $sql = 'CALL PSI_AjoutClasse(\'' . $uneClasse . '\')';
+
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = array();
+            }
+
+            return $res;
+        }
+        /**
+         * Retourne la liste des classes présent dans la base de données
+         * 
+         * @return -> Liste de classe : array
+         */
+        function listeClasse(){
+            $sql = 'CALL PSS_ListeClasse';
+
+            try {
+                $res = $this->queryRequest($sql);
+            } catch (PDOException $e) {
+                $res = array();
+            }
+
+            return $res;
+        }
         /**
          * Retourne la liste des élèves présent dans la base de données
          * 
          * @return -> liste d'élève : array
          */
-        function listeEleves()
+        function listeEleve()
         {
             $sql = 'CALL PSS_ListeEleve';
 
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
             }
 
             return $res;
@@ -172,7 +245,7 @@ namespace GestBD {
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
             }
 
             return $res;
@@ -195,7 +268,7 @@ namespace GestBD {
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
             }
 
             return $res;
@@ -215,7 +288,7 @@ namespace GestBD {
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
             }
 
             return $res;
@@ -235,7 +308,7 @@ namespace GestBD {
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {
-                $res = $e->getMessage();
+                $res = array();
             }
 
             return $res;

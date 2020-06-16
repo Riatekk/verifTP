@@ -38,11 +38,6 @@ if (!empty($_REQUEST['notif'])) {
     include 'ALE_view_notif.inc.php';
 }
 
-echo $conn->testConnexionBD($BDnom);
-echo $conn->testConnexionUtilisateur();
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

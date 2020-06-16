@@ -6,6 +6,7 @@ include '../class/ALE_Class_GestXML.php';
 use GestBD\ConnexionBD;
 use GestBD\RequeteBD;
 use GestXML\FichierXML;
+use SimpleXMLElement;
 
 /**
  * Création d'un objet pour accédé aux informations de 

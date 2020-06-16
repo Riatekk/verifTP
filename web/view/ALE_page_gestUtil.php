@@ -43,14 +43,14 @@ if (!empty($_REQUEST['notif'])) {
  * contenant les informations de la base de données n'exite
  * pas, alors on redirige vers une page d'erreur.
  */
-if (!$conn->testConnexionBD($BDnom) || !$conn->testConnexionUtilisateur() || !file_exists($cheminXML)) {
+
+if (!$conn->connexion() || !file_exists($cheminXML)) {
   if (!empty($_REQUEST['notif'])) {
     header("Location: ALE_page_erreur.php?notif=" . $_REQUEST['notif']);
   } else {
     header("Location: ALE_page_erreur.php");
   }
 }
-
 
 
 ?>
@@ -84,7 +84,7 @@ if (!$conn->testConnexionBD($BDnom) || !$conn->testConnexionUtilisateur() || !fi
         <div class="d-flex">
           <h1 class="mr-auto">Liste des élèves</h1>
           <div class="p-2">
-            <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter une classe</a>
+            <a class="btn btn-primary" href="ALE_form_ajoutClasse.php">Gérer les classes</a>
           </div>
           <div class="p-2">
             <a class="btn btn-success" href="ALE_form_ajoutEleve.php">Ajouter des élèves</a>
@@ -102,7 +102,7 @@ if (!$conn->testConnexionBD($BDnom) || !$conn->testConnexionUtilisateur() || !fi
                 });
               });
             </script>
-            <a id="myBtn0" class=" btn btn-primary text-white">Gérer les élèves par classe</a>
+            <a id="myBtn0" class=" btn btn-danger text-white">Supprimer les élèves par classe</a>
 
             <div class="toast toast0 fade hide position-absolute">
 
@@ -149,7 +149,7 @@ if (!$conn->testConnexionBD($BDnom) || !$conn->testConnexionUtilisateur() || !fi
              * Pour chaque ligne recupéré on l'ajoute au tableau
              */
             $i = 1;
-            foreach ($requete->listeEleves() as $row) {
+            foreach ($requete->listeEleve() as $row) {
 
               $i += 1;
 

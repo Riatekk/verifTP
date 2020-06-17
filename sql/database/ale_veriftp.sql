@@ -1,11 +1,17 @@
-/*Creation de la base de données*/
+/*
+Creation de la base de données
+*/
+
 DROP DATABASE IF EXISTS `ale_veriftp`;
 CREATE DATABASE IF NOT EXISTS `ale_veriftp`;
 
 
 USE `ale_veriftp`;
 
-/*Creation des procédures stockés*/
+/*
+Creation des procédures stockés
+*/
+
 DROP PROCEDURE IF EXISTS `PSD_SuppressionEleves`;
 CREATE PROCEDURE `PSD_SuppressionEleves` (`unId` INT)
 DELETE FROM eleves WHERE id = unId;
@@ -34,7 +40,16 @@ DROP PROCEDURE IF EXISTS `PSU_ModificationEleves`;
 CREATE PROCEDURE `PSU_ModificationEleves` (IN `unId` INT, IN `unNom` VARCHAR(255), IN `unPrenom` VARCHAR(255), IN `uneClasse` INT)
 UPDATE eleves SET Nom=unNom,Prenom=unPrenom, id_classe=uneClasse WHERE id = unId;
 
-/*Creation des tables*/
+
+
+
+
+
+
+
+/*
+Creation des tables
+*/
 DROP TABLE IF EXISTS `classe`;
 CREATE TABLE IF NOT EXISTS `classe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,7 +85,18 @@ CREATE TABLE IF NOT EXISTS `tp` (
   `libelle_tp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Creation des triggers*/
+
+
+
+
+
+
+
+
+
+/*
+Creation des triggers
+*/
 
 DROP TRIGGER IF EXISTS `Tri_INSERT_ALE_Mail`;
 CREATE TRIGGER `Tri_INSERT_ALE_Mail` BEFORE INSERT ON `eleves` FOR EACH ROW SET NEW.Mail = CONCAT(NEW.Prenom, '.', NEW.Nom, '@campus-la-chataigneraie.org');
@@ -86,5 +112,3 @@ CREATE TRIGGER `Tri_UPDATE_ALE_Mail` BEFORE UPDATE ON `eleves` FOR EACH ROW SET 
 DROP TRIGGER IF EXISTS `Tri_UPDATE_ALE_Trigramme`;
 
 CREATE TRIGGER `Tri_UPDATE_ALE_Trigramme` BEFORE UPDATE ON `eleves` FOR EACH ROW SET NEW.Trigramme = UPPER(CONCAT(LEFT( NEW.Prenom, 1), LEFT( NEW.Nom,2 )));
-
-/*Insertion des données*/

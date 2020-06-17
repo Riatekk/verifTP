@@ -28,19 +28,34 @@ $MotDePasse = $xml->getMotDePasse();
  */
 $conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
 /*
-$myfile = fopen("../../sql/database/ale_veriftp.sql", "r");
-$sql = fread($myfile, filesize("../../sql/database/ale_veriftp.sql"));
-
-//$res = $conn->creationBaseDeDonnées($sql);
-
-fclose($myfile);
-$myfile = fopen("../../sql/database/ale_veriftp_table_eleves.sql", "r");
-$sql = fread($myfile, filesize("../../sql/database/ale_veriftp_table_eleves.sql"));
+$myfile = fopen("../../sql/database/ale_veriftp_database.sql", "r");
+$sql = fread($myfile, filesize("../../sql/database/ale_veriftp_database.sql"));
 
 $res = $conn->creationBaseDeDonnées($sql);
 
 fclose($myfile);
 */
+$chemin = "../../sql/database/ale_veriftp.sql";
+$myfile = fopen($chemin, "r");
+$sql = fread($myfile, filesize($chemin));
+
+$sql = explode(";",$sql);
+
+foreach($sql as $sql){
+    //echo '<br/>';
+    $res = $conn->envoiBDScript($sql);
+    //echo $sql;
+}
+
+fclose($myfile);
+
+/*
+$myfile = fopen("../../sql/database/ale_veriftp_table_eleves.sql", "r");
+$sql = fread($myfile, filesize("../../sql/database/ale_veriftp_table_eleves.sql"));
+fclose($myfile);
+*/
+
+
 if($res)
 {
     header("Location: ../view/ALE_page_gestUtil.php?notif=1");

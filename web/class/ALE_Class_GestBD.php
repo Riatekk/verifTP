@@ -51,34 +51,34 @@ namespace GestBD {
                 return false;
             }
         }
-        /*
-        function creationBaseDeDonnées($maBaseDeDonnees)
+
+        function envoiBDScript($maTableScript)
         {
-            echo $maBaseDeDonnees . '<br/>';
             // Create connection
             $conn = new mysqli($this->ip, $this->utilisateur, $this->motDePasse);
             // Check connection
             if ($conn->connect_error) {
-                
-                echo 'Erreur de connexion';
-                return false;
+                die("<br/>Connection failed: " . $conn->connect_error);
             }
 
-            // Create database
-            $sql = $maBaseDeDonnees;
-            $conn->query($sql);
+            if(!mysqli_select_db($conn,$this->nomBD))
+            {
+              $conn->query($maTableScript);
+            }
 
-            if ($conn->query($sql) === TRUE) {
-                
-                echo 'OK';
+            mysqli_select_db($conn,$this->nomBD);
+
+            if ($conn->query($maTableScript) === TRUE) {
+                echo "<br/>Database table successfully";
                 return true;
             } else {
-                
-                echo 'Erreur SQL' . $conn->error;
+                echo "<br/>Error creating table: " . $conn->error;
                 return false;
             }
+
+            $conn->close();
         }
-*/
+
         /**
          * Test de connexion au SGBDR avec l'utilisatuer courant
          * 
@@ -98,6 +98,21 @@ namespace GestBD {
             mysqli_close($link);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Cette classe permet déffectuer des requetes SQL

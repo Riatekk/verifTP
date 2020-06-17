@@ -59,11 +59,11 @@ $requete = new RequeteBD($conn);
             <div class="form-group">
 
                 <label for="id" name="">Identifiant numéro :</label>
-                <input type="id" class="form-control bg-secondary text-white" style="pointer-events: none;" name="id" id="id" value="<?php echo $_REQUEST['id'] ?>">
+                <input type="id" class="form-control bg-secondary text-white" style="pointer-events: none;" name="id" id="id" value="<?php echo $_REQUEST['id']; ?>">
 
                 <br />
                 <label for="email">Nom</label>
-                <input type="nom" class="form-control" placeholder="Indiquez le nom de l'élève" id="nom" name="nom" value="<?php echo $_REQUEST['nom'] ?>" required>
+                <input type="nom" class="form-control" placeholder="Indiquez le nom de l'élève" id="nom" name="nom" value="<?php echo $_REQUEST['nom']; ?>" required>
 
                 <div class="valid-feedback">Valide</div>
                 <div class="invalid-feedback">Renseigner le nom de l'élève</div>
@@ -71,10 +71,26 @@ $requete = new RequeteBD($conn);
             </div>
             <div class="form-group">
                 <label for="prenom">Prenom</label>
-                <input type="prenom" class="form-control" placeholder="Indiquez le prenom de l'élève" id="prenom" name="prenom" value="<?php echo $_REQUEST['prenom'] ?>" required>
+                <input type="prenom" class="form-control" placeholder="Indiquez le prenom de l'élève" id="prenom" name="prenom" value="<?php echo $_REQUEST['prenom']; ?>" required>
 
                 <div class="valid-feedback">Valide</div>
                 <div class="invalid-feedback">Renseigner le prenom de l'élève</div>
+
+            </div>
+            <div class="form-group">
+                <label for="trigramme">Trigramme</label>
+                <input type="trigramme" class="form-control" placeholder="Indiquez le trigramme de l'élève" id="trigramme" name="trigramme" value="<?php echo $_REQUEST['trigramme']; ?>" required>
+
+                <div class="valid-feedback">Valide</div>
+                <div class="invalid-feedback">Renseigner le trigramme de l'élève</div>
+
+            </div>
+            <div class="form-group">
+                <label for="mail">Mail</label>
+                <input type="mail" class="form-control" placeholder="Indiquez le mail de l'élève" id="mail" name="mail" value="<?php echo $_REQUEST['mail']; ?>" required>
+
+                <div class="valid-feedback">Valide</div>
+                <div class="invalid-feedback">Renseigner le mail de l'élève</div>
 
             </div>
             <div class="form-group">
@@ -82,7 +98,9 @@ $requete = new RequeteBD($conn);
                 <select class="form-control " name="classe" id="classe">
                     <?php
                     foreach ($requete->listeClasse() as $classe) {
-                        echo '<option value="' . $classe['id'] . '">' . $classe['classe_libelle'] . '</option>';
+                        echo '<option value="' . $classe['id'] . '"';
+                        if($_REQUEST['classe'] == $classe['classe_libelle']){echo 'selected';}
+                        echo '>' . $classe['classe_libelle'] . '</option>';
                     }
                     ?>
                 </select>

@@ -228,10 +228,10 @@ namespace GestBD {
          * 
          * @return -> erreur ou non de la requete : string
          */
-        function modificationEleves($id, $nom, $prenom, $uneClasse)
+        function modificationEleves($id, $nom, $prenom, $uneClasse, $unMail, $unTrig)
         {
-            $sql = 'CALL PSU_ModificationEleves(\'' . $id . '\',\'' . $nom . '\',\'' . $prenom . '\',\'' . $uneClasse . '\')';
-
+            $sql = 'CALL PSU_ModificationEleves(\'' . $id . '\',\'' . $nom . '\',\'' . $prenom . '\',\'' . $uneClasse .'\',\'' . $unMail .'\',\'' . $unTrig . '\')';
+            echo $sql;
             try {
                 $res = $this->queryRequest($sql);
             } catch (PDOException $e) {

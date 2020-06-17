@@ -189,7 +189,7 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
                     </div>
 
                     <div class="toast-body">
-                    Voulez-vous le <a class="btn btn-warning m-0 p-1" href="ALE_form_modifEleve.php?nom=' . $row['Nom'] . '&prenom=' . $row['Prenom'] . '&id=' . $row['id'] . '">Modifier</a>
+                    Voulez-vous le <a class="btn btn-warning m-0 p-1" href="ALE_form_modifEleve.php?nom=' . $row['Nom'] . '&prenom=' . $row['Prenom'] . '&id=' . $row['id'] . '&trigramme=' . $row['Trigramme'] . '&mail=' . $row['Mail'] . '&classe=' . $row['classe_libelle'] . '">Modifier</a>
                      ou le <a class="btn btn-danger m-0 p-1" href="../function/ALE_delete_eleves.php?id=' . $row['id'] . '">Supprimer</a> ?
                     </div>
                   
@@ -203,6 +203,10 @@ if (!$conn->connexion() || !file_exists($cheminXML)) {
         </table>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
 </body>
 
 </html>

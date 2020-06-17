@@ -41,8 +41,11 @@ DROP PROCEDURE IF EXISTS `PSS_ListeEleve`;
 CREATE PROCEDURE `PSS_ListeEleve` ()  SELECT E.id, Nom, Prenom, Trigramme, Mail, classe_libelle FROM eleves E INNER JOIN classe C on E.id_classe = C.id;
 
 DROP PROCEDURE IF EXISTS `PSU_ModificationEleves`;
-CREATE PROCEDURE `PSU_ModificationEleves` (IN `unId` INT, IN `unNom` VARCHAR(255), IN `unPrenom` VARCHAR(255), IN `uneClasse` INT)
-UPDATE eleves SET Nom=unNom,Prenom=unPrenom, id_classe=uneClasse WHERE id = unId;
+CREATE PROCEDURE `PSU_ModificationEleves` (`unId` INT, `unNom` VARCHAR(255), `unPrenom` VARCHAR(255), `uneClasse` INT, `unMail` VARCHAR(255), `unTrig` VARCHAR(255))  UPDATE eleves 
+SET Nom=unNom,Prenom=unPrenom, id_classe=uneClasse, Mail=unMail, Trigramme=unTrig
+WHERE id = unId;
+
+
 
 
 
@@ -109,10 +112,11 @@ DROP TRIGGER IF EXISTS `Tri_INSERT_ALE_Trigramme`;
 
 CREATE TRIGGER `Tri_INSERT_ALE_Trigramme` BEFORE INSERT ON `eleves` FOR EACH ROW SET NEW.Trigramme = UPPER(CONCAT(LEFT( NEW.Prenom, 1), LEFT( NEW.Nom,2 )));
 
-DROP TRIGGER IF EXISTS `Tri_UPDATE_ALE_Mail`;
 
-CREATE TRIGGER `Tri_UPDATE_ALE_Mail` BEFORE UPDATE ON `eleves` FOR EACH ROW SET NEW.Mail = CONCAT(NEW.Prenom, '.', NEW.Nom, '@campus-la-chataigneraie.org');
+--DROP TRIGGER IF EXISTS `Tri_UPDATE_ALE_Mail`;
 
-DROP TRIGGER IF EXISTS `Tri_UPDATE_ALE_Trigramme`;
+--CREATE TRIGGER `Tri_UPDATE_ALE_Mail` BEFORE UPDATE ON `eleves` FOR EACH ROW SET NEW.Mail = CONCAT(NEW.Prenom, '.', NEW.Nom, '@campus-la-chataigneraie.org');
 
-CREATE TRIGGER `Tri_UPDATE_ALE_Trigramme` BEFORE UPDATE ON `eleves` FOR EACH ROW SET NEW.Trigramme = UPPER(CONCAT(LEFT( NEW.Prenom, 1), LEFT( NEW.Nom,2 )));
+--DROP TRIGGER IF EXISTS `Tri_UPDATE_ALE_Trigramme`;
+
+--CREATE TRIGGER `Tri_UPDATE_ALE_Trigramme` BEFORE UPDATE ON `eleves` FOR EACH ROW SET NEW.Trigramme = UPPER(CONCAT(LEFT( NEW.Prenom, 1), LEFT( NEW.Nom,2 )));

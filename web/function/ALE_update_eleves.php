@@ -30,7 +30,7 @@ $MotDePasse = $xml->getMotDePasse();
 $conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
 $requete = new RequeteBD($conn);
 
-$res = $requete->modificationEleves($_REQUEST['id'],$_REQUEST['nom'],$_REQUEST['prenom']);
+$res = $requete->modificationEleves($_REQUEST['id'],$_REQUEST['nom'],$_REQUEST['prenom'],$_REQUEST['classe'],$_REQUEST['mail'],$_REQUEST['trigramme']);
 
 if($res)
 {
@@ -38,7 +38,7 @@ if($res)
 }
 else
 {
-    header("Location: ../view/ALE_page_gestUtil.php?notif=4");
+    //header("Location: ../view/ALE_page_gestUtil.php?notif=4");
 }
 exit;
 ?>

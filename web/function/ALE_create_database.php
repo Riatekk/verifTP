@@ -27,19 +27,18 @@ $MotDePasse = $xml->getMotDePasse();
  * et de requètage.
  */
 $conn = new ConnexionBD($AddrIP, $BDnom, $Utilisateur, $MotDePasse);
-/*
-$myfile = fopen("../../sql/database/ale_veriftp_database.sql", "r");
-$sql = fread($myfile, filesize("../../sql/database/ale_veriftp_database.sql"));
 
-$res = $conn->creationBaseDeDonnées($sql);
-
-fclose($myfile);
-*/
 $chemin = "../../sql/database/ale_veriftp.sql";
 $myfile = fopen($chemin, "r");
 $sql = fread($myfile, filesize($chemin));
 
 $sql = explode(";",$sql);
+
+//Calcul de la taille de la liste
+$size = sizeof($sql) - 1;
+
+//Suppression de la dernière ligne qui est vide et génère une erreur
+unset($sql[$size]);
 
 foreach($sql as $sql){
     //echo '<br/>';

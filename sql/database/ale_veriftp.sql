@@ -12,6 +12,10 @@ USE `ale_veriftp`;
 Creation des procédures stockés
 */
 
+DROP PROCEDURE IF EXISTS `PSD_SuppressionClasse`;
+CREATE PROCEDURE `PSD_SuppressionClasse` (`unId` INT)
+DELETE FROM classe WHERE id = unId;
+
 DROP PROCEDURE IF EXISTS `PSD_SuppressionEleves`;
 CREATE PROCEDURE `PSD_SuppressionEleves` (`unId` INT)
 DELETE FROM eleves WHERE id = unId;
@@ -30,7 +34,7 @@ INSERT INTO eleves (Nom, Prenom, id_classe) VALUES (unNom, unPrenom,IdClasse);
 
 DROP PROCEDURE IF EXISTS `PSS_ListeClasse`;
 CREATE PROCEDURE `PSS_ListeClasse` ()
-SELECT classe_libelle
+SELECT classe_libelle, id
 FROM classe;
 
 DROP PROCEDURE IF EXISTS `PSS_ListeEleve`;

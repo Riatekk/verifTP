@@ -11,17 +11,11 @@
     ?>
     <?php
 
-
-
-
-
-
-
-
     function ScanDirectory($Directory, $i)
     {
         $MyDirectory = opendir($Directory) or die('Erreur');
         $index = 0;
+        echo '<li>';
         while ($Entry = @readdir($MyDirectory)) {
 
 
@@ -30,35 +24,35 @@
 
                 $index += 1;
                 $dirindex = $i . $index;
-
                 if ($i === 0) {
-                    echo    '<div id ="demo' . $i . '"class="btn-secondary" data-toggle="collapse" data-target="#demo' . $dirindex . '" aria-expanded="true">' .
-                        '/' . $Entry .
-                        '</div>';
+
+                    echo '<ul><div id ="demo' . $i . '" class="btn-secondary" data-toggle="collapse" data-target="#demo' . $dirindex . '">/' . $Entry .'</div>';
+                    echo    '<div id ="demo' . $dirindex . '" class="collapse" data-toggle="collapse" aria-expanded="true">';
+                    ScanDirectory($Directory . '/' . $Entry, $dirindex);
+                    echo '</div></ul>';
+
                 } else {
-                    echo    '<div id ="demo' . $i . '"class="btn-secondary collapse" data-toggle="collapse" data-target="#demo' . $dirindex . '" aria-expanded="false">' .
-                        '/' . $Entry .
-                        '</div>';
+
+                    echo '<ul><div id ="demo' . $i . '" class="btn-info collapse" data-toggle="collapse" data-target="#demo' . $dirindex . '">/' . $Entry .'</div>';
+                    echo    '<div id ="demo' . $dirindex . '" class="collapse" data-toggle="collapse" aria-expanded="true">';
+                    ScanDirectory($Directory . '/' . $Entry, $dirindex);
+                    echo '</div></ul>';
+
                 }
-                ScanDirectory($Directory . '/' . $Entry, $dirindex);
-                echo '<br/>';
             } else {
                 //$i = $i-1;
                 if ($Entry != '.' && $Entry != '..') {
-                    echo    '<div id="demo' . $i . '" class="collapse bg-info ">' .
+                    echo    '<ul><div id="demo' . $i . '" class="collapse">' .
                         $Entry .
-                        '</div>';
+                        '</div></ul>';
                 }
             }
         }
+        echo '</li>';
         closedir($MyDirectory);
     }
 
-    ScanDirectory('..', 0);
-
-
-
-
+    ScanDirectory('../..', 0);
     ?>
 </body>
 
